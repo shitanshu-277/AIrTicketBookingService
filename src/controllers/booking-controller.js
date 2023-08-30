@@ -14,7 +14,15 @@
     }
     async sendMessageToQueue(req,res) {
         const channel = await createChannel();
-        const data = {message: 'Success'};
+        const data = {
+            data: {
+                subject: 'This is noti from queue',
+                content: 'Some queue will subscribe this',
+                recepientEmail: 'airlinemanagement1234@gmail.com',
+                notificationTime: '2023-08-29T20:50:00Z'
+            },
+            service: 'CREATE_TICKET'
+        };
         publishMessage(channel, REMINDER_BINDING_KEY, JSON.stringify(data));
         res.status(200).json({
             message: 'Successfully published the event'
